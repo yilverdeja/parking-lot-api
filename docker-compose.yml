@@ -1,0 +1,20 @@
+services:
+  server:
+    depends_on:
+      - db
+    build: .
+    ports: 
+      - 5000:5000
+    environment:
+      DB_URL: mongodb://db/parkingLot
+  
+  db:
+    image: mongo:7.0-jammy
+    restart: always
+    ports: 
+      - 27017:27017
+    volumes:
+      - parkingLot:/data/db
+  
+volumes:
+  parkingLot:
